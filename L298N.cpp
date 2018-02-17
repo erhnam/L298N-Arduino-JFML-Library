@@ -26,8 +26,8 @@ L298N::L298N(int ena, int in1, int in2, int in3, int in4, int enb) {
   _motorA = ena;
   _pinA1 = in1;
   _pinA2 = in2;
-  _pinB1 = en3;
-  _pinB2 = en4;
+  _pinB1 = in3;
+  _pinB2 = in4;
   _motorB = enb;
 }
 
