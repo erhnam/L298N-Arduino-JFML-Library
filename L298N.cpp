@@ -7,13 +7,6 @@
 #include "Arduino.h"
 #include "L298N.h"
 
-struct Motor {
-  int in1;
-  int in2;
-  int pwn;
-};
-
-Motor motors[2];
 
 L298N::L298N(int ena, int in1, int in2, int in3, int in4, int enb) {
   pinMode (ena, OUTPUT);
@@ -29,15 +22,24 @@ L298N::L298N(int ena, int in1, int in2, int in3, int in4, int enb) {
   _pinB1 = in3;
   _pinB2 = in4;
   _motorB = enb;
+  _speedA = 0;
+  _speedB = 0;
 }
 
-void L298N::setSpeed(int speed) {
-  _speed = speed;
-  analogWrite(_motorA, _speed);
-  analogWrite(_motorB, _speed);
+void L298N::setSpeed(int speedA,  int speedB) {
+  analogWrite(_motorA, speedA);
+  analogWrite(_motorB, speedB);
 }
 
-void L298N::forward() {
+void L298N::setSpeedA(int speedA) {
+  analogWrite(_motorA, speedA);
+}
+
+void L298N::setSpeedB(int speedB) {
+  analogWrite(_motorB, speedB);
+}
+
+void L298N::backward() {
   digitalWrite(_pinB2, HIGH);
   digitalWrite(_pinB1, LOW);
 
@@ -61,7 +63,7 @@ void L298N::turn_left() {
   digitalWrite(_pinA1, LOW);
 }
 
-void L298N::backward() {
+void L298N::forward() {
   digitalWrite(_pinB2, LOW);
   digitalWrite(_pinB1, HIGH);
 

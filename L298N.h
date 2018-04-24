@@ -13,7 +13,9 @@ class L298N{
 
   public:
     L298N(int ena, int in1, int in2, int in3, int in4, int enb);
-    void setSpeed(int speed);
+    void setSpeed(int speedA,  int speedB);
+    void setSpeedA(int speedA);
+    void setSpeedB(int speedB);
     void forward();
     void stop();
     void turn_right();
@@ -21,7 +23,8 @@ class L298N{
     void backward();
 
   private:
-    int _speed;
+    int _speedA;
+    int _speedB;
     int _motorA, _pinA1, _pinA2;
     int _motorB, _pinB1, _pinB2;
 };
